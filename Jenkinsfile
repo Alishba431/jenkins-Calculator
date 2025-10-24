@@ -2,25 +2,32 @@ pipeline {
     agent any
 
     tools {
-        maven 'Maven'
+        nodejs 'NodeJS'
     }
 
     parameters {
         string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Git branch to build')
-        string(name: 'BUILD_ENV', defaultValue: 'dev', description: 'Build environment (dev/staging/prod)')
+        string(name: 'BUILD_ENV', defaultValue: 'dev', description: 'Environment: dev, staging, prod')
+        string(name: 'STUDENT_NAME', defaultValue: 'your name', description: 'Provide your name here — no name, no marks!')
     }
 
     environment {
-        NEW_VERSION = "1.3.0"
+        APP_VERSION = "1.0.0"
     }
 
     stages {
 
+        stage('Install Dependencies') {
+            steps {
+                echo "Installing Node.js dependencies..."
+                bat "npm install"
+            }
+        }
+
         stage('Build') {
             steps {
-                echo "Building version ${NEW_VERSION} on branch ${params.BRANCH_NAME}"
-                // Uncomment the line below if Maven is configured correctly
-                // bat "mvn clean package -Dversion=${NEW_VERSION}"
+                echo "Building Calculator App v${APP_VERSION} on branch ${params.BRANCH_NAME}"
+                // Example: bat "npm run build"
             }
         }
 
@@ -29,15 +36,15 @@ pipeline {
                 expression { return params.BUILD_ENV == 'dev' }
             }
             steps {
-                echo 'Running unit tests...'
-                // bat "mvn test"
+                echo 'Running unit tests with Jest...'
+                bat "npm test"
             }
         }
 
         stage('Deploy') {
             steps {
-                echo "Deploying application for environment: ${params.BUILD_ENV}"
-                // bat "deploy_script.bat ${params.BUILD_ENV}"
+                echo 'Simulating deployment of Node.js Calculator App...'
+                // Example: bat "npm run deploy"
             }
         }
     }
@@ -48,10 +55,10 @@ pipeline {
             // deleteDir()
         }
         success {
-            echo ' Pipeline succeeded.'
+            echo '✅ Pipeline executed successfully.'
         }
         failure {
-            echo ' Pipeline failed.'
+            echo '❌ Pipeline failed.'
         }
     }
 }
