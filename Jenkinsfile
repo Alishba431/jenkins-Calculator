@@ -8,7 +8,7 @@ pipeline {
     parameters {
         string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Git branch to build')
         string(name: 'BUILD_ENV', defaultValue: 'dev', description: 'Environment: dev, staging, prod')
-        string(name: 'STUDENT_NAME', defaultValue: 'your name', description: 'Provide your name here — no name, no marks!')
+        string(name: 'Alishba', defaultValue: 'your name', description: 'Provide your name here — no name, no marks!')
     }
 
     environment {
