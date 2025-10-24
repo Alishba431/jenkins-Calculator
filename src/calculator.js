@@ -17,4 +17,12 @@ function divide(a, b) {
   return a / b;
 }
 
-module.exports = { add, subtract, multiply, divide };
+function modulus(a, b) {
+  if (b === 0) {
+    throw new Error('Cannot take modulus by zero');
+  }
+  return a % b;
+}
+
+// Export all functions
+module.exports = { add, subtract, multiply, divide, modulus };
