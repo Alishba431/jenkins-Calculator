@@ -1,7 +1,8 @@
-// src/calculator.test.js
 const request = require('supertest');
 const app = require('./app');
-const { add, subtract, multiply, divide } = require('./calculator');
+const calculator = require('./calculator'); // ✅ Import entire calculator module
+const { add, subtract, multiply, divide, modulus } = calculator;
+
 
 describe('Calculator Functions', () => {
   test('adds numbers correctly', () => {
