@@ -1,6 +1,5 @@
-// src/app.js
 const express = require('express');
-const { add, subtract, multiply, divide } = require('./calculator');
+const { add, subtract, multiply, divide, modulus } = require('./calculator'); // 🆕 include modulus
 
 const app = express();
 app.use(express.json());
@@ -28,6 +27,16 @@ app.get('/divide', (req, res) => {
   const { a, b } = req.query;
   try {
     res.json({ result: divide(Number(a), Number(b)) });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// 🆕 Modulus route
+app.get('/modulus', (req, res) => {
+  const { a, b } = req.query;
+  try {
+    res.json({ result: modulus(Number(a), Number(b)) });
   } catch (err) {
     res.status(400).json({ error: err.message });
   }
