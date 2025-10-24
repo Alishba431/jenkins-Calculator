@@ -51,4 +51,11 @@ describe('Calculator API', () => {
     expect(res.status).toBe(400);
     expect(res.body.error).toBe("Cannot divide by zero");
   });
+  test('calculates modulus correctly', () => {
+    expect(calculator.modulus(10, 3)).toBe(1);
+  });
+
+  test('throws error when modulus by zero', () => {
+    expect(() => calculator.modulus(10, 0)).toThrow('Cannot take modulus by zero');
+  });
 });
